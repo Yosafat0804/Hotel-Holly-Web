@@ -57,6 +57,7 @@ Copy .env.example to .env
 
 ```bash
   cp .env.example .env
+  New-Item -Path .env -ItemType File
 ```
 Generate AppKey
 
@@ -71,7 +72,7 @@ Open .env on your code editor and set the .env database config
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=your-database-name
+DB_DATABASE=hotel_holly_web
 DB_USERNAME=root
 DB_PASSWORD=
 ```
@@ -92,7 +93,7 @@ Run project
   php artisan serve
 ```
 
-open your project locally : http://127.0.0.1:8000 (port and host adjust)
+open your project locally : http://127.0.0.1:8000
 
 
 ## Authors
