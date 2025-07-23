@@ -42,15 +42,11 @@ Clone the project
 
 
 ```bash
-  cd your-folder
   git clone https://github.com/Yosafat0804/Hotel-Holly-Web.git
+  cd Hotel-Holly-Web
 ```
 
 Go to the project directory
-
-```bash
-  cd laravel-hotel-Holly-Web
-```
 
 Install Packages
 
