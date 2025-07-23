@@ -57,8 +57,7 @@ Install Packages
 Copy .env.example to .env
 
 ```bash
-  cp .env.example .env
-  New-Item -Path .env -ItemType File
+  cp .env.example .env ( kalau tidak bisa dapat membuat .env di notepad )
 ```
 Generate AppKey
 
