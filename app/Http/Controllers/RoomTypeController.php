@@ -19,7 +19,7 @@ class RoomTypeController extends Controller
     public function index()
     {
         $datas = RoomType::all();
-        return view('admin.roomType.index', compact('datas'));
+        return view('admin.roomType.index',compact('datas'));
     }
 
     /**
@@ -115,13 +115,34 @@ class RoomTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if ($request->foto != NULL) {
-            $imgName = time() . $request->foto->getClientOriginalName();
-            $request->foto->move(public_path('images/tipekamar'), $imgName);
+        $fotos = $request->foto;
+        if (count($fotos) > 0) {
+            // $request->validate([
+            //     'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
+            // ]);
+            foreach ($fotos as $foto) {
+                $imgName = time() . $foto->getClientOriginalName();
+                $foto->move(public_path('images/tipekamar'), $imgName);
+                RoomTypePhoto::create([
+                    'room_type_id' => $id,
+                    'foto' => $imgName,
+                ]);
+
+            }
         } else {
+            $request->validate([
+                'foto' => 'nullable',
+            ]);
             $data = RoomType::find($id);
             $imgName = $data->foto;
         }
+        // if ($request->foto != NULL) {
+        //     $imgName = time() . $request->foto->getClientOriginalName();
+        //     $request->foto->move(public_path('images/tipekamar'), $imgName);
+        // } else {
+        //     $data = RoomType::find($id);
+        //     $imgName = $data->foto;
+        // }
 
         if ($request['facilities'] != NULL) {
             $request['facilities'] = implode(", ", $request['facilities']);
@@ -137,7 +158,7 @@ class RoomTypeController extends Controller
 
         if($post){
             return redirect()->route('roomtype.index')->with('message', 'Data created!');
-        } else{
+        }else{
             return redirect()->route('roomtype.index')->with('message', 'Failed to create data!');
         }
     }
@@ -187,8 +208,12 @@ class RoomTypeController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->take(5)
                 ->get();
-             return view('admin.roomType.detail-room', compact('data', 'jumlahTersedia', 'lastRooms'));
+                $fotos = RoomTypePhoto::where('room_type_id', $id)->get();
+            return view('admin.roomType.detail-room', compact('data', 'jumlahTersedia', 'lastRooms', 'fotos'));
         } elseif (auth()->user()->role == 'admin') {
+
+            return view('admin.roomType.detail-room', compact('data', 'jumlahTersedia'));
+        }elseif (auth()->user()->role == 'admin') {
             return redirect()->route('home');
         } elseif(auth()->user()->role == 'resepsionis'){
             return redirect()->route('home');

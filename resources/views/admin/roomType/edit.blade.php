@@ -49,7 +49,7 @@
             <div class="form-group">
                 <label for="foto" style="color:#00008b; font-weight:600;">Foto</label><br>
                 <img src="{{ asset('images/tipekamar/'.$data->foto) }}" width="150px" style="border-radius:12px; border:1.5px solid #d4af37; box-shadow:0 2px 8px rgba(0,0,0,0.07); margin-bottom:10px;" alt="">
-                <input id="foto" name="foto" type="file" class="form-control @error('foto') is-invalid @enderror" autocomplete="foto" autofocus style="border-radius:16px; border:1.5px solid #d4af37;">
+                <input id="foto" name="foto[]" multiple type="file" class="form-control @error('foto') is-invalid @enderror" autocomplete="foto" autofocus style="border-radius:16px; border:1.5px solid #d4af37;">
                 @error('foto')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

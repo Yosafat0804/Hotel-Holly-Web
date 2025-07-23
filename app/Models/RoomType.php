@@ -17,11 +17,6 @@ class RoomType extends Model
         'information'
     ];
 
-    public function photos()
-    {
-        return $this->hasMany(RoomTypePhoto::class, 'room_type_id');
-    }
-
     public function getTotalRooms()
     {
         return $this->hasMany(Room::class, 'type_id', 'id')->where('status','=', 'a');;

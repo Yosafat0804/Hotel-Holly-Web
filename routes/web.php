@@ -7,13 +7,13 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelFacilityController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ReceptionistController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomFacilityController;
 use App\Http\Controllers\RoomTypeController;
 use App\Http\Controllers\SupervisorController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\RoomTypePhotoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,6 +82,12 @@ Route::group(['middleware' => 'prevent'], function () {
             Route::get('/to_failed/{id}', [TransactionController::class, 'toFailedTransaction'])->name('receptionis.tofailed');
             Route::get('/to_rejected/{id}', [TransactionController::class, 'toRejectedTransaction'])->name('receptionis.torejected');
             Route::get('/checkin', [TransactionController::class, 'viewCheckIn'])->name('receptionis.viewcheckin');
+            Route::get('/checkout', [TransactionController::class, 'viewCheckOut'])->name('receptionis.viewcheckout');
+            Route::get('/checkout-note/{transaction_id}', [TransactionController::class, 'viewCheckoutNote'])->name('receptionis.viewCheckoutNote');
+            Route::post('/checkout-note/{transaction_id}', [TransactionController::class, 'storeCheckoutNote'])->name('receptionis.storeCheckoutNote');
+            Route::get('/receptionis/maintenance-note/{room}', [ReceptionistController::class, 'maintenanceNote'])->name('receptionis.maintenanceNote');
+
+
             // Route::get('/checkin-pdata', [TransactionController::class, 'checkInPersonaldata'])->name('receptionis.checkin.pdata');
             // Route::post('/checkin/post', [TransactionController::class, 'checkInPost'])->name('receptionis.checkin.post');
             // Route::post('/checkin-pdata/post', [TransactionController::class, 'checkInPersonalDataPost'])->name('receptionis.checkin.pdata.post');
@@ -90,17 +96,25 @@ Route::group(['middleware' => 'prevent'], function () {
             Route::get('/receptionis/logs', [TransactionController::class, 'logs'])->name('receptionis.logs');
             Route::post('/receptionis/proof/uploadss', [PaymentController::class, 'receptionisUploadProof'])->name('receptionis.upload.proof');
 
+            Route::get('/receptionis/room-list', [ReceptionistController::class, 'roomList'])->name('receptionis.roomList');
+
             Route::post('/checkout/{room_id}', [TransactionController::class, 'checkOut'])->name('receptionis.checkout');
             Route::post('/checkin/{room_id}', [TransactionController::class, 'checkIn'])->name('receptionis.checkin');
+
         });
 
         Route::group(['middleware' => 'maintenance'], function () {
             Route::get('/maintenance', [HomeController::class, 'maintenance'])->name('maintenance.home');
+            Route::patch('/maintenance/send-note', [MaintenanceController::class, 'sendNoteToReceptionist'])->name('maintenance.sendNoteToReceptionist');
             Route::get('/maintenance/detail', [MaintenanceController::class, 'userDetail'])->name('maintenance.detail');
             Route::get('/maintenance/room-facility', [MaintenanceController::class, 'roomFacility'])->name('maintenance.roomFacility');
             Route::get('/maintenance/hotel-facility', [MaintenanceController::class, 'hotelFacility'])->name('maintenance.hotelFacility');
             Route::patch('/maintenance/room-facility/{id}/toggle-status', [MaintenanceController::class, 'toggleRoomFacilityStatus'])->name('maintenance.roomFacility.toggleStatus');
             Route::patch('/maintenance/hotel-facility/{id}/toggle-status', [MaintenanceController::class, 'toggleHotelFacilityStatus'])->name('maintenance.hotelFacility.toggleStatus');
+            Route::get('/maintenance/room-list', [MaintenanceController::class, 'roomList'])->name('maintenance.roomList');
+            Route::get('/maintenance/detail-room/{id}', [MaintenanceController::class, 'detailRoom'])->name('maintenance.detailRoom');
+            Route::put('/maintenance/detail-room/', [MaintenanceController::class, 'updateRoom'])->name('maintenance.updateRoom');
+            Route::get('/maintenance/schedules', [MaintenanceController::class, 'scheduleMaintenance'])->name('maintenance.scheduleMaintenance');
         });
 
         Route::group(['middleware' => 'supervisor'], function () {

@@ -7,12 +7,12 @@
         ROOM TYPE LIST
       </h3>
       <div class="card-tools">
-          <a href="{{ route('roomtype.create') }}" class="btn btn-sm" style="background:#d4af37; color:#000; font-weight:bold; border-radius:16px; margin-left:12px;">
-            <i class="fas fa-plus"></i> Add
-          </a>
-           <a href="{{ route('roomtype.photo.create') }}" class="btn btn-sm" style="background:#fff; color:#00008b; font-weight:bold; border-radius:16px; margin-left:8px; border:2px solid #d4af37;">
-            <i class="fas fa-image"></i> Tambah Foto
-          </a>
+            <a href="{{ route('roomtype.photo.create') }}" class="btn btn-sm" style="background:#d4af37; color:#000; font-weight:bold; border-radius:16px; margin-left:12px;">
+                <i class="fas fa-camera"></i> Add Photo
+            </a>
+            <a href="{{ route('roomtype.create') }}" class="btn btn-sm" style="background:#d4af37; color:#000; font-weight:bold; border-radius:16px; margin-left:12px;">
+                <i class="fas fa-plus"></i> Add
+            </a>
       </div>
     </div>
     <div class="card-body" style="padding:2rem;">

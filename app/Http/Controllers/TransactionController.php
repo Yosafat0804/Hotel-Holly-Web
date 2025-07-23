@@ -28,12 +28,6 @@ class TransactionController extends Controller
         return view('transaction.index', compact('datas', 'pay'));
     }
 
-    public function userDetail()
-    {
-        $user = auth()->user();
-        return view('receptionis.detail', compact('user'));
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -232,8 +226,8 @@ class TransactionController extends Controller
     public function reservations()
     {
         $datas = Transaction::select("*")
-            ->orderBy("created_at", "desc")
-            ->get();;
+                            ->orderBy("created_at", "desc")
+                            ->get();;
         return view('receptionis.reservations', compact('datas'));
     }
 
@@ -407,6 +401,12 @@ class TransactionController extends Controller
         $transaction->status = 'checked out';
         $transaction->save();
 
+        if ($transaction->room && $transaction->room->roomType) {
+            $roomType = $transaction->room->roomType;
+            $roomType->available_room = $roomType->available_room + $transaction->many_room;
+            $roomType->save();
+        }
+
         return redirect()->back()->with('success', 'Anda berhasil checkout lebih awal.');
     }
 
@@ -432,6 +432,12 @@ class TransactionController extends Controller
                 'log' => date('YmdHis') . '_receptionist_customer_checkout',
                 'executor_id' => Auth::user()->id,
             ]);
+
+            if ($transaction->room && $transaction->room->roomType) {
+                $roomType = $transaction->room->roomType;
+                $roomType->available_room = $roomType->available_room + $transaction->many_room;
+                $roomType->save();
+            }
 
             return response()->json([
                 'status' => 'success',
@@ -535,5 +541,63 @@ class TransactionController extends Controller
                             ->orderBy("created_at", "desc")
                             ->get();;
         return view('app.log', compact('datas'));
+    }
+
+     public function viewCheckOut()
+    {
+        $transactions = Transaction::whereIn('status', ['verified', 'checked in'])->get();
+        $datas = $transactions;
+        return view('receptionis.checkout', compact('transactions', 'datas'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function viewCheckoutNote($transaction_id)
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $transaction = Transaction::find($transaction_id);
+        if (!$transaction) {
+            return redirect()->back()->with('error', 'Transaction not found.');
+        }
+        return view('receptionis.checkout-note', [
+            'transaction' => $transaction,
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeCheckoutNote(Request $request)
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $transaction = Transaction::find($request->transaction_id);
+        if (!$transaction) {
+            return redirect()->back()->with('error', 'Transaction not found.');
+        }
+
+        $transaction->checkout_note = $request->checkout_note;
+        $transaction->save();
+
+        $log = date('YmdHis') . '_checkout_note_created';
+        Log::create([
+            'transaction_id' => $transaction->id,
+            'log' => $log,
+            'executor_id' => Auth::user()->id,
+        ]);
+
+        return redirect()->route('receptionis.viewcheckout')->with('status', 'Checkout note added successfully.');
     }
 }

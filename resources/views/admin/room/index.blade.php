@@ -22,7 +22,6 @@
                         <th>No</th>
                         <th>Room Type</th>
                         <th>Number</th>
-                        <th>Information</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -33,7 +32,6 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $data->type_name }}</td>
                             <td>{{ $data->number }}</td>
-                            <td>{{ $data->information ? $data->information : 'No Information' }}</td>
                             <td>
                                 @if ($data->status == 'a')
                                     <span style="color:#28a745; font-weight:bold;">Available</span>

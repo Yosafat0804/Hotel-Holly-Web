@@ -26,7 +26,7 @@ class AddStatusToFacilities extends Migration
     public function down()
     {
         Schema::table('facilities', function (Blueprint $table) {
-            $table->dropColumn('status');
+            //
         });
     }
 }

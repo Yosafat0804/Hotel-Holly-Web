@@ -37,11 +37,11 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->user->name }}</td>
                                 <td>{{ $item->user->phone }}</td>
-                                <td>{{ $item->room->roomType->name }}</td>
+                                <td>{{ optional(optional($item->room)->roomType)->name ?? '-' }}</td>
                                 <td>{{ $item->many_room }}</td>
                                 <td>{{ $item->check_in . ' - ' . $item->check_out}}</td>
                                 <td>{{ $item->created_at->diffForHumans() }}</td>
-                                <td>@currency($item->room->roomType->price)</td>
+                                <td>@currency(optional(optional($item->room)->roomType)->price ?? 0)</td>
                                 <td style="font-weight:bold; color:#d4af37;">@currency($item->payment->price)</td>
                                 <td>
                                     <span style="font-weight:bold; color:

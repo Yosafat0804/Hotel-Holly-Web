@@ -169,6 +169,12 @@
                                     <a class="nav-link" href="{{ route('receptionis.viewcheckin') }}">{{ __('Check In') }}</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('receptionis.viewcheckout') }}">{{ __('Check Out') }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('receptionis.roomList') }}">{{ __('Room') }}</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="{{ route('receptionis.reservations') }}">{{ __('Reservations') }}</a>
                                 </li>
                             @elseif(Auth::user()->role == 'maintenance' || Auth::user()->role == 'supervisor')

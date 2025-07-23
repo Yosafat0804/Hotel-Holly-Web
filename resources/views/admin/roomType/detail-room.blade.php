@@ -6,25 +6,35 @@
             <div class="col-md-6 mb-4">
                 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner rounded shadow" style="border: 3px solid #d4af37;">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        </ol>
-                        @foreach($data->photos as $key => $photo)
-                            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                <img src="{{ asset('images/tipekamar/' . $photo->foto) }}" class="d-block w-100" alt="Room Photo">
+                        @if($fotos->isEmpty())
+                            <div class="carousel-item active">
+                                <img src="{{ asset('images/tipekamar/default.jpg') }}" class="d-block w-100" alt="Default Room Photo">
                             </div>
-                        @endforeach
+                        @elseif($fotos->count() > 0 && $fotos->count() < 2)
+                            <div class="carousel-item active">
+                                <img src="{{ asset('images/tipekamar/' . $fotos[0]->foto) }}" class="d-block w-100" alt="Room Photo">
+                            </div>
+                        @else
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            </ol>
+                            @foreach($fotos as $key => $photo)
+                                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                    <img src="{{ asset('images/tipekamar/' . $photo->foto) }}" class="d-block w-100" alt="Room Photo">
+                                </div>
+                            @endforeach
+                            <button class="carousel-control-prev" type="button" data-target="#carouselExampleSlidesOnly" data-slide="prev" style="background: none; border: none;">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-target="#carouselExampleSlidesOnly" data-slide="next" style="background: none; border: none;">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </button>
+                        @endif
                     </div>
-                    <button class="carousel-control-prev" type="button" data-target="#carouselExampleSlidesOnly" data-slide="prev" style="background: none; border: none;">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-target="#carouselExampleSlidesOnly" data-slide="next" style="background: none; border: none;">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </button>
                 </div>
             </div>
             <div class="col-md-6 mb-4">

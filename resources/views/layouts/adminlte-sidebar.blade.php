@@ -68,7 +68,28 @@
                             <p>Logs</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.incomeReport') }}" class="nav-link"
+                            style="color:#00008b; font-weight:600; border-radius:16px; margin-bottom:4px;">
+                            <i class="fas fa-clipboard-list nav-icon" style="color:#d4af37;"></i>
+                            <p>Laporan Pemasukan</p>
+                        </a>
+                    </li>
                 @elseif (Auth::user()->role == 'maintenance')
+                    <li class="nav-item">
+                                <a href="{{ route('maintenance.scheduleMaintenance') }}" class="nav-link"
+                                    style="color:#00008b; font-weight:600; border-radius:16px; margin-bottom:4px;">
+                                    <i class="fas fa-couch nav-icon" style="color:#d4af37;"></i>
+                                    <p>Schedules</p>
+                                </a>
+                    </li>
+                    <li class="nav-item">
+                            <a href="{{ route('maintenance.roomList') }}" class="nav-link"
+                                style="color:#00008b; font-weight:600; border-radius:16px; margin-bottom:4px;">
+                                <i class="fas fa-couch nav-icon" style="color:#d4af37;"></i>
+                                <p>Room List</p>
+                            </a>
+                    </li>
                     <li class="nav-item">
                         <a href="{{ route('maintenance.roomFacility') }}" class="nav-link"
                             style="color:#00008b; font-weight:600; border-radius:16px; margin-bottom:4px;">

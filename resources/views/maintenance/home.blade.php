@@ -16,7 +16,6 @@
                     @endif
                     <div style="color:#00008b; font-size:1.15rem; font-weight:600;">
                         {{ __('You are logged in as Maintenance!') }}
-                        <a href="{{ route('maintenance.detail') }}">See your profile</a>
                     </div>
                 </div>
             </div>

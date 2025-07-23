@@ -1,4 +1,12 @@
-@extends('layouts.template')
+@php
+   if(Auth::user()->role === 'admin') {
+      $layoutDirectory = 'layouts.adminlte';
+   } elseif (Auth::user()->role === 'resepsionis') {
+      $layoutDirectory = 'layouts.app';
+   }
+@endphp
+
+@extends($layoutDirectory)
 @section('content')
 <section class="accomodation_area section_gap mt-5">
     <div class="container">

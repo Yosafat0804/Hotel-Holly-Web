@@ -28,16 +28,15 @@ class HomeController extends Controller
     public function index()
     {
         $roomTypes = RoomType::all();
-        $datas = HotelFacility::all();
-        // dd($datas);
+        $hotelFacilities = HotelFacility::all();
         if (!Auth::check()) {
-            return view('landing', compact(['roomTypes', 'datas']));
+            return view('landing', compact('roomTypes', 'hotelFacilities'));
         } elseif (auth()->user()->role == 'admin') {
             return redirect()->route('admin.home');
         } elseif (auth()->user()->role == 'resepsionis') {
             return view('receptionis.home');
         } elseif (auth()->user()->role == 'customer') {
-            return view('landing', compact('roomTypes', 'datas'));
+            return view('landing', compact('roomTypes', 'hotelFacilities'));
         } elseif (auth()->user()->role == 'maintenance') {
             return view('maintenance.home');
         } elseif (auth()->user()->role == 'supervisor') {

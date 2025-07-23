@@ -32,18 +32,16 @@
                         @if ($datas == '[]')
                             <tr class="text-center table-primary">
                                 <td colspan="7">Tidak ada transaksi</td>
-
                             </tr>
                         @else
-
                             @foreach ($datas as $item)
 
                                 <tr class="text-center table-primary">
-                                    <td>{{ $item->room->roomType->name }}</td>
-                                    <td>{{ $item->roomNumber->number }}</td>
+                                    <td>{{ optional(optional($item->room)->roomType)->name ?? '-' }}</td>
+                                    <td>{{ optional($item->roomNumber)->number ?? '-' }}</td>
                                     <td>{{ $item->many_room }}</td>
-                                    <td>@currency($item->room->roomType->price)</td>
-                                    <td>@currency($item->payment->price)</td>
+                                    <td>@currency(optional(optional($item->room)->roomType)->price ?? 0)</td>
+                                    <td>@currency(optional($item->payment)->price ?? 0)</td>
                                     <td>{{ $item->status }}</td>
                                     <td>
                                         @if ($item->status == 'canceled')

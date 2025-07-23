@@ -35,16 +35,6 @@
                         </span>
                     @enderror
                 </div>
-                {{-- room speciality --}}
-                <div class="form-group col-md-12">
-                    <label for="information" style="color:#00008b; font-weight:600;">Information</label>
-                    <textarea id="information" name="information" class="form-control @error('information') is-invalid @enderror" rows="3" style="border-radius:16px; border:1.5px solid #d4af37;">{{ old('information') }}</textarea>
-                    @error('information')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
             </div>
             <div class="form-group float-right row mb-0">
                 <div class="col-md-6">

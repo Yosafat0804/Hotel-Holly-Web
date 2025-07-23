@@ -87,11 +87,8 @@
                 <h2 class="title_w" style="color: #fff;">Fasilitas Hotel</h2>
                 <p style="color: #e0e0e0;">Fasilitas Ramah Lingkungan untuk Anda yang Cinta Alam</p>
             </div>
-            <!-- <div class="row justify-content-center">
-                <h2>Hello</h2>
-            </div> -->
             <div class="row justify-content-center">
-                @foreach ($datas as $item)
+                @foreach ($hotelFacilities as $item)
                 <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch">
                     <div class="card shadow-lg border-0 w-100" style="background: #fff; border-radius: 18px;">
 

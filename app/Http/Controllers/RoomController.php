@@ -41,15 +41,9 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'type_id' => 'required|exists:type_rooms,id',
-            'number' => 'required|string|max:255',
-            'information' => 'nullable|string',
-        ]);
         $post = Room::create([
             'type_id' => $request->type_id,
             'number' => $request->number,
-            'information' => $request->information,
         ]);
 
         if($post){
@@ -95,7 +89,6 @@ class RoomController extends Controller
         $post = Room::find($id)->update([
             'type_id' => $request->type_id,
             'number' => $request->number,
-            'information' => $request->information,
             'status' => $request->status,
         ]);
 

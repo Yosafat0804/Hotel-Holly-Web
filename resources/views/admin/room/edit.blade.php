@@ -37,15 +37,6 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="information" style="color:#00008b; font-weight:600;">Information</label>
-                <textarea name="information" class="form-control @error('information') is-invalid @enderror" id="information" rows="3" required autocomplete="information" autofocus style="border-radius:16px; border:1.5px solid #d4af37;">{{ old('information') }}{{ $data->information }}</textarea>
-                @error('information')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-            <div class="form-group">
                 <label for="status" style="color:#00008b; font-weight:600;">Status</label>
                 <select name="status" id="status" class="form-control @error('status') is-invalid @enderror" value="{{ old('status') }}" required autocomplete="status" autofocus style="border-radius:16px; border:1.5px solid #d4af37;">
                     <option {{ $data->status == "a" ? 'selected' : ''}} value="a">Available</option>
