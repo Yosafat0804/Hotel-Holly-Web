@@ -27,6 +27,7 @@ Aplikasi web hotel yang komprehensif ini, yang dikembangkan menggunakan framewor
 - **Integrasi Kalender (Calendar Integration)**: Pengguna dapat menambahkan jadwal menginap ke kalender digital mereka (Google Calendar atau lainnya) agar tidak lupa tanggal reservasi
 
 ## Screenshoots
+<img width="1833" height="976" alt="image" src="https://github.com/user-attachments/assets/764f9494-09b2-471d-9dfd-49abc794a953" />
 
 
 ## Tech Stack
