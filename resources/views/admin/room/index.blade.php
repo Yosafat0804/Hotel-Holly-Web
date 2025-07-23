@@ -23,6 +23,7 @@
                         <th>Room Type</th>
                         <th>Number</th>
                         <th>Status</th>
+                        <th>Information</th>
                         <th>Action</th>
                     </tr>
                 </thead>

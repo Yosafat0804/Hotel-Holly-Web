@@ -46,7 +46,7 @@ class RoomController extends Controller
             'number' => $request->number,
         ]);
 
-        if($post){
+        if($post) {
             return redirect()->route('room.index')->with('message', 'Data created!');
         }else{
             return redirect()->route('room.create')->with('message', 'Failed to create data!');

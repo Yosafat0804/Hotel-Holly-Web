@@ -75,7 +75,7 @@
                                     @foreach($lastRooms as $room)
                                         <tr>
                                             <td>{{ $room->number }}</td>
-                                            <td>{{ $room->information }}</td>
+                                            <td>{{ $room->information ?  $room->information : 'No Information' }}</td>
                                             <td>
                                                 @if($room->status == 'a')
                                                     <span class="badge badge-success">Tersedia</span>

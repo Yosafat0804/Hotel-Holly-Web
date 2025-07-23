@@ -36,6 +36,15 @@
                     @enderror
                 </div>
             </div>
+            <div class="form-group">
+                <label for="information" style="color:#00008b; font-weight:600;">Information</label>
+                <textarea id="information" name="information" class="form-control @error('information') is-invalid @enderror" required autocomplete="information" autofocus style="border-radius:16px; border:1.5px solid #d4af37;">{{ old('information') }}</textarea>
+                @error('information')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
             <div class="form-group float-right row mb-0">
                 <div class="col-md-6">
                     <button type="submit" class="btn btn-primary" style="background:#d4af37; color:#000; font-weight:bold; border-radius:16px; padding:8px 28px; border:none;">
